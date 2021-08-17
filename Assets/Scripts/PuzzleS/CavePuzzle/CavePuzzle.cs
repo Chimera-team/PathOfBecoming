@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using AnimationUtils.RenderUtils;
 
 public class CavePuzzle : MonoBehaviour
 {
@@ -10,15 +11,17 @@ public class CavePuzzle : MonoBehaviour
     [SerializeField] PuzzleButtons[] puzzleButtons;
     private Color colorIfUnpressed = new Color(255f, 155f, 0f, 0f);
     [SerializeField] PuzzleController interactController;
+
+    [SerializeField] SpriteRenderer solveHologram;
+    const float timeToFade = 1f;
     private void Update()
     {
         if (isPressed[0] && isPressed[1] && isPressed[2] && isPressed[3] && isPressed[4]&& canUWin)
         {
             GameWin = true;
             Debug.Log("игра выиграна");
-            interactController.Handle_Puzzle_result(true);
             Interface.current.inventory.Remove_From_Inventory(typeof(Notes), true);
-            Destroy(gameObject);
+            Solve_Animation();
         }   
     }
     public void OnPuzzleButtonClick(int num)
@@ -51,5 +54,20 @@ public class CavePuzzle : MonoBehaviour
         }
         interactController.Handle_Puzzle_result(false);
         gameObject.SetActive(false);
+    }
+
+    public void Solve_Animation()
+    {
+        gameObject.SetActive(false);
+        solveHologram.gameObject.SetActive(true);
+        solveHologram.Unfade(timeToFade, () =>
+        {
+            solveHologram.Fade(timeToFade, () =>
+            {
+                solveHologram.gameObject.SetActive(false);
+                interactController.Handle_Puzzle_result(true);
+                Destroy(gameObject);
+            });
+        });
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public abstract class Engine : MonoBehaviour
 {
-    public static bool load = false;
+    public static bool load = true;
 
     public static Engine current;
 
