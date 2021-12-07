@@ -27,8 +27,6 @@ public class DialogueSystem : MonoBehaviour
 {
     [SerializeField] Text output;//ссылка на текст который будет на UI отображаться
     [SerializeField] Text nameOutput;//ссылка на имя которое будет на UI отображаться
-    [SerializeField] Text choice1Text;//ссылка на 1 вариант выбора который будет на UI отображаться
-    [SerializeField] Text choice2Text;//ссылка на 2 вариант выбора который будет на UI отображаться
     [SerializeField] Animator panelAnim;//анимация панели диалогов
     [SerializeField] Animator choosePanelAnim;// анимация панели выбора диалогов
     [SerializeField] Image dialogueImg;//ссылка на картинку говорящего персонажа
@@ -37,18 +35,15 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] Sprite impImg;//ссылка непосредственно на спрайт анчутки
     [SerializeField] Sprite catImg;//на спрайт кота
 
+<<<<<<< Updated upstream
     public string[] DialoguesFile;//все строки файла
+=======
+    [SerializeField] GameObject[] chooseButtons;
+    [SerializeField] RectTransform pointer;
+    private int currentPointerPosition;
+
+>>>>>>> Stashed changes
     private string[][] dialogues;
-    private int whereIsEndChoose;//на какой строчке конец выбора
-    private int choice1;//строка с выбором 1
-    private int choice2;//строка с выбором 2
-    //далее сабстринги для поиска их в файле
-    private string subPlayer = "player";//тут собсна все эти рефы
-    private string subFairy = "fairy";
-    private string subImp = "imp";
-    private string subCat = "cat";
-    private string subAnonim = "anonym";
-    private string subStranger = "stranger";
     Queue<string> linesTriggered = new Queue<string>();//очередь строк, которые триггерятся. именно эта очередь будет выводиться на экран
     private bool isDialogueTyping = false;
     private bool typeDialogeInstantly = false;
@@ -140,7 +135,44 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    //тут
+    public void StartChooseDialogue(int[] dialogueNumbers)
+    {
+         for(int i = 0;i<dialogueNumbers.Length;i++)
+        {
+            chooseButtons[i].SetActive(true);
+        }
+        pointer.position = new Vector3(pointer.rect.x, chooseButtons[0].transform.position.y);
+        currentPointerPosition = 0;
+        StartCoroutine(ChoosingDialogues(dialogueNumbers));
+    }
+
+    private IEnumerator ChoosingDialogues(int[] dialogueNumbers)
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            if(currentPointerPosition<dialogueNumbers.Length-1)
+            {
+                currentPointerPosition++;
+            }
+            
+        }
+        else if(Input.GetKeyDown(KeyCode.W))
+        {
+            if(currentPointerPosition>0)
+            {
+                currentPointerPosition--;
+            }
+        }
+        pointer.position = new Vector3(pointer.rect.x, chooseButtons[currentPointerPosition].transform.position.y);
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            StartDialogue(currentPointerPosition, onComplete);
+            yield break;
+        }
+        yield return null;
+    }
+    
     private IEnumerator TypeLine(string sentence)//написать строку заменив иконки и имена
     {
         if(sentence.Trim() == "")
