@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 89588e704470b405ba445ea419b1f3ce, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -90,5 +90,5 @@ MonoBehaviour:
   manaCost: 10
   spellType: 1
   cooldown: 2
-  projectile: {fileID: 5779557686273034328, guid: 8fbccc05f9d7f1348a168a271e72a8a4,
+  projectile: {fileID: 5206894355132075777, guid: 90a220e2c0e43654baa00fa1182aa0ac,
     type: 3}

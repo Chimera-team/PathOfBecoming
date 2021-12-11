@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Settings;
+using PlayerControls;
 
 public class BuildPathPuzzle : Puzzle
 {
@@ -42,20 +42,20 @@ public class BuildPathPuzzle : Puzzle
     void Update()
     {
         Select_Segment();
-        if (ControlButtons.USESPELL)
+        if (ControlButtonsHold.USESPELL)
             Choose_Segment();
     }
 
     void Select_Segment()
     {
-        if (ControlButtons.LEFT)
+        if (ControlButtonsHold.LEFT)
         {
             if (selectedIndex == 0)
                 selectedIndex = Mathf.Max(segmentsPool.Count - 1, 0);
             else
                 --selectedIndex;
         }
-        else if (ControlButtons.RIGHT)
+        else if (ControlButtonsHold.RIGHT)
         {
             if (selectedIndex == Mathf.Max(segmentsPool.Count - 1, 0))
                 selectedIndex = 0;

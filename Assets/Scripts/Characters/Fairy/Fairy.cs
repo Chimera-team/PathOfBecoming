@@ -10,6 +10,7 @@ public class Fairy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         joint = GetComponent<RelativeJoint2D>();
+        lastCheckpoint = transform.position;
     }
 
     public void Connect_Fairy(Rigidbody2D anchor)

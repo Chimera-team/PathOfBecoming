@@ -2,7 +2,7 @@
 
 public class RandomDialogueTrigger : DialogueTrigger
 {
-    [SerializeField] Dialogue[] dialogues;
+    [SerializeField] int[] dialogues;
 
     public override void StartDialogue()
     {

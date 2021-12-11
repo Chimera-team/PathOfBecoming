@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using Settings;
+using PlayerControls;
 
 public class Interface : MonoBehaviour
 {
@@ -31,6 +31,5 @@ public class Interface : MonoBehaviour
         interfacePanel.alpha = Convert.ToInt32(enable);
         interfacePanel.interactable = enable;
         interfacePanel.blocksRaycasts = enable;
-        ControlButtons.ENABLE_MOVEMENT = enable;
     }
 }

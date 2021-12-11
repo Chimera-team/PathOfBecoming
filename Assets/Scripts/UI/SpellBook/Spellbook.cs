@@ -1,88 +1,71 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.UI;
+using AnimationUtils.TransformUtils;
 
 public class Spellbook : MonoBehaviour
 {
-    [SerializeField] Animator slotsAnim;
+    [SerializeField] private Transform _chosenItemPlace;
+    [SerializeField] private Transform _heapPlace;
 
-    [SerializeField] private Sprite openBook;
-    [SerializeField] private Sprite closedBook;
-    [SerializeField] private Button book;
-
-    public Transform[] slots;
     CanvasGroup spellBookCG;
 
     List<Spell> spellList = new List<Spell>();
 
     public Spell chosenSpell { get; private set; }
+    private int _chosenSpellIndex = 0;
 
-    bool shown = false;
+    private float _castAngle 
+    { 
+        set
+        {
+            Engine.current.playerController.spellDirection.localRotation = Quaternion.Euler(0, 0, value);
+        }
+        get
+        {
+            return Engine.current.playerController.spellDirection.rotation.eulerAngles.z;
+        }
+    }
+    private const float angleChange = 45f;
 
     private void Awake()
     {
         spellBookCG = GetComponent<CanvasGroup>();
     }
 
-    public void ShowSlots()
-    {
-        shown = !shown;
-        Spell_Animation(-1);
-        slotsAnim.SetBool("ShowSlots", shown);
-        if (shown)
-            book.image.sprite = openBook;
-        else
-            book.image.sprite = closedBook;
-
-    }
-
     public void Learn_Spell(GameObject prefab)
     {
-        Spell spell = Instantiate(prefab, slots[spellList.Count]).GetComponent<Spell>();
+        Spell spell = Instantiate(prefab, _heapPlace).GetComponent<Spell>();
         spellList.Add(spell);
-    }
-
-    public void Choose_Spell(Spell spell)
-    {
-        int index = spellList.IndexOf(spell);
-        chosenSpell = spell;
-        Spell_Animation(index, true);
-    }
-
-    public void Spell_Used(Spell spell)
-    {
-        int index = spellList.IndexOf(spell);
-        chosenSpell = null;
-        Spell_Animation(index, false);
-    }
-
-    public void Cast_Chosen_Spell(Vector3 firePoint, bool alternative = false)
-    {
-        if (!chosenSpell)
-            return;
-        chosenSpell.Cast(firePoint, alternative);
-    }
-
-    void Spell_Animation(int index, bool state = false)
-    {
-        switch (index)
+        if (spellList.Count == 1)
         {
-            case 0:
-                slotsAnim.SetBool("ChooseSpellOne", state);
-                break;
-            case 1:
-                slotsAnim.SetBool("ChooseSpellTwo", state);
-                break;
-            case 2:
-                slotsAnim.SetBool("ChooseSpellThree", state);
-                break;
-            default:
-                slotsAnim.SetBool("ChooseSpellOne", state);
-                slotsAnim.SetBool("ChooseSpellTwo", state);
-                slotsAnim.SetBool("ChooseSpellThree", state);
-                break;
+            spell.transform.Move_To(_chosenItemPlace.position, 0.2f, false);
+            chosenSpell = spell;
         }
+    }
+
+    public void Scroll_Book()
+    {
+        if (spellList.Count <= 1)
+            return;
+        chosenSpell.transform.Move_To(_heapPlace.position, 0.2f, false);
+        ++_chosenSpellIndex;
+        if (_chosenSpellIndex == spellList.Count)
+            _chosenSpellIndex -= spellList.Count;
+        chosenSpell = spellList[_chosenSpellIndex];
+        chosenSpell.transform.Move_To(_chosenItemPlace.position, 0.2f, false);
+    }
+
+    public void Start_Casting()
+    {
+        Engine.current.playerController.Change_Controls<CastingHandler>();
+    }
+
+    public void Cast()
+    {
+        Engine.current.playerController.Change_Controls<DefaultHandler>();
+        chosenSpell.Cast(Engine.current.playerController.firePoint.position, _castAngle);
+        Engine.current.playerController.spellDirection.gameObject.SetActive(false);
     }
 
     public void Enable_Spellbook()
@@ -90,6 +73,21 @@ public class Spellbook : MonoBehaviour
         spellBookCG.alpha = 1;
         spellBookCG.blocksRaycasts = true;
         spellBookCG.interactable = true;
+    }
+
+    public void Reset_Angle()
+    {
+        Engine.current.playerController.spellDirection.gameObject.SetActive(true);
+        _castAngle = 0f;
+    }
+
+    public void Change_Cast_Angle(int direction)
+    {
+        _castAngle += angleChange * direction;
+        if (_castAngle > 90)
+            _castAngle = Mathf.Clamp(_castAngle, 360 - angleChange, 360);
+        else
+            _castAngle = Mathf.Clamp(_castAngle, 0, angleChange);
     }
 
     public void Load_State(SpellBookData data)

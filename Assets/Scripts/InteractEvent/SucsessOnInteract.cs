@@ -3,6 +3,9 @@ public class SucsessOnInteract : InteractEvent
 {
     public override void Start_Event()
     {
-        onSuccess?.Invoke();
+        if (Engine.current.playerController.buttonsControl is InventoryHandler)
+            onFail?.Invoke();
+        else
+            onSuccess?.Invoke();
     }
 }

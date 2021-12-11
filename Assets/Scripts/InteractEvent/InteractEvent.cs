@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using Settings;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class InteractEvent : MonoBehaviour
@@ -8,7 +7,7 @@ public abstract class InteractEvent : MonoBehaviour
     public UnityEvent onSuccess;
     public UnityEvent onFail;
 
-    bool active = false;
+    public static InteractEvent current { get; private set; }
 
     public virtual void Start_Event()
     {
@@ -19,21 +18,15 @@ public abstract class InteractEvent : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (active && ControlButtons.INTERACT)
-            Start_Event();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        active = true;
+        current = this;
         Engine.current.playerController.interactIndicator.gameObject.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        active = false;
+        current = null;
         Engine.current.playerController.interactIndicator.gameObject.SetActive(false);
     }
 }

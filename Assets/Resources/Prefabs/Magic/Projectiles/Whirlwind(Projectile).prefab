@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2733221802868007065}
   - component: {fileID: 5523236902156884742}
   - component: {fileID: 4659300216528719276}
-  - component: {fileID: 5444643556200973251}
+  - component: {fileID: 1886298630103382581}
   m_Layer: 11
-  m_Name: Wind
+  m_Name: Whirlwind(Projectile)
   m_TagString: Wind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &5444643556200973251
+--- !u!114 &1886298630103382581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2733221802868007067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd937eabaf88ade4189896ee83cc8fc2, type: 3}
+  m_Script: {fileID: 11500000, guid: e0ae51323bb5ce541b22a96f968654f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
@@ -4795,7 +4795,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

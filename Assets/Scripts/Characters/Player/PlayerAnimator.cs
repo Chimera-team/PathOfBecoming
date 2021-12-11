@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Settings;
+using PlayerControls;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -7,6 +7,8 @@ public class PlayerAnimator : MonoBehaviour
     private float walk;
     private PlayerController PC;
     bool faceRight = true;
+
+    const float _Eps = 0.001f; 
 
     AudioClip[] steps;
     AudioClip jump;
@@ -31,8 +33,8 @@ public class PlayerAnimator : MonoBehaviour
 
     void Update()
     {
-        walk = ControlButtons.xAxisRaw;
-        if(walk != 0)
+        walk = ControlButtonsAxis.xAxisRaw;
+        if(walk != 0 && PC.rb.velocity.sqrMagnitude > _Eps)
         {
             anim.SetBool("walk", true);
             if (faceRight == false && walk > 0)

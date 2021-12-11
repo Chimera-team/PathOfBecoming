@@ -1,37 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using AnimationUtils.TransformUtils;
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] Animator slotsAnim;
-    bool shown = false;
-    public Transform[] slots;
+    [SerializeField] private Transform _chosenItemPlace;
+    [SerializeField] private Transform _heapPlace;
+
 
     List<Item> inventoryList = new List<Item>();
+    public Item chosenItem { get; private set; }
+    private int _chosenItemIndex = 0;
 
     CanvasGroup inventoryCG;
 
     private void Awake()
     {
         inventoryCG = GetComponent<CanvasGroup>();
-    }
-
-    public void ShowSlots()
-    {
-        shown = !shown;
-        slotsAnim.SetBool("SlotsShown", shown);
-    }
-
-    public void SlotDropped(int slotNum)  
-    {
-        foreach (Transform child in slots[slotNum])
-            Destroy(child.gameObject);
-    }
-
-    private void OnDisable()
-    {
-        slotsAnim.SetBool("SlotsShown", true);
-        shown = true;
     }
 
     public InventoryData SaveInvetnoryData()
@@ -66,11 +51,8 @@ public class Inventory : MonoBehaviour
             return true;
         }
 
-        if (inventoryList.Count >= slots.Length) //inventory is full
-            return false;
-
         //create new item in inventory
-        itemScript = Instantiate(item, slots[inventoryList.Count]).GetComponent<Item>();
+        itemScript = Instantiate(item, _heapPlace).GetComponent<Item>();
         itemScript.Initialise(this);
         inventoryList.Add(itemScript);
         return true;
@@ -86,9 +68,8 @@ public class Inventory : MonoBehaviour
         int itemIndex = Get_Item_Index(item);
         if (itemIndex == -1)
             return false;
+        Destroy(inventoryList[itemIndex].gameObject);
         inventoryList.RemoveAt(itemIndex);
-        SlotDropped(itemIndex);
-        Sort_Inventory();
         return true;
     }
 
@@ -102,9 +83,8 @@ public class Inventory : MonoBehaviour
         int itemIndex = Get_Item_Index_By_Type(type, force);
         if (itemIndex == -1)
             return false;
+        Destroy(inventoryList[itemIndex].gameObject);
         inventoryList.RemoveAt(itemIndex);
-        SlotDropped(itemIndex);
-        Sort_Inventory();
         return true;
     }
 
@@ -125,20 +105,47 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
-    void Sort_Inventory()
-    {
-        for (int i = 0; i < inventoryList.Count; i++)
-        {
-            Transform item = inventoryList[i].gameObject.transform;
-            item.SetParent(slots[i]);
-            item.localPosition = Vector3.zero;
-        }
-    }
-
     public void Enable_Inventory()
     {
         inventoryCG.alpha = 1;
         inventoryCG.blocksRaycasts = true;
         inventoryCG.interactable = true;
+    }
+
+    public void Scroll_Inventory(int direction)
+    {
+        if (inventoryList.Count == 0)
+        {
+            _chosenItemIndex = 0;
+            chosenItem = null;
+            return;
+        }
+        if (chosenItem && inventoryList.Count > 0)
+            chosenItem.transform.Move_To(_heapPlace.position, 0.2f, false);
+        _chosenItemIndex += direction;
+        if (_chosenItemIndex >= inventoryList.Count)
+            _chosenItemIndex -= inventoryList.Count;
+        else if (_chosenItemIndex < 0)
+            _chosenItemIndex += inventoryList.Count;
+        chosenItem = inventoryList[_chosenItemIndex];
+        if (inventoryList.Count > 0)
+            chosenItem.transform.Move_To(_chosenItemPlace.position, 0.2f, false);
+    }
+
+    public void Open_Inventory()
+    {
+        if (inventoryList.Count == 0 || !inventoryCG.interactable)
+            return;
+        _chosenItemIndex = 0;
+        chosenItem = inventoryList[_chosenItemIndex];
+        chosenItem.transform.Move_To(_chosenItemPlace.position, 0.2f, false);
+        Engine.current.playerController.Change_Controls<InventoryHandler>();
+    }
+
+    public void Close_Inventory()
+    {
+        chosenItem.transform.Move_To(_heapPlace.position, 0.2f, false);
+        Engine.current.playerController.Change_Controls<DefaultHandler>();
+        chosenItem = null;
     }
 }
