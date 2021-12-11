@@ -40,6 +40,7 @@ public class DialogueSystem : MonoBehaviour
 
     public string[] DialoguesFile;//все строки файла
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     [SerializeField] GameObject[] chooseButtons;
     [SerializeField] RectTransform pointer;
@@ -48,6 +49,8 @@ public class DialogueSystem : MonoBehaviour
 >>>>>>> Stashed changes
 =======
 >>>>>>> dev
+=======
+>>>>>>> parent of cba5d01 (выборы диалогов)
 =======
 >>>>>>> parent of cba5d01 (выборы диалогов)
     private string[][] dialogues;
@@ -136,11 +139,15 @@ public class DialogueSystem : MonoBehaviour
     //тут
     private IEnumerator TypeLine(string sentence)//написать строку заменив иконки и имена
     {
+<<<<<<< HEAD
         if (sentence.Trim() == "" && linesTriggered.Count != 0)
         {
             sentence = linesTriggered.Dequeue();
         }
         else if (linesTriggered.Count == 0)
+=======
+        if(sentence.Trim() == "")
+>>>>>>> parent of cba5d01 (выборы диалогов)
         {
             yield break;
         }
