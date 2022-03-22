@@ -33,8 +33,8 @@ public class SoundPlayer : MonoBehaviour
             musicSound.clip = musicQueue.Dequeue();
             musicSound.Play();
         }
-        //if (musicSound.volume != Engine.current.gameSettings.soundSettings.musicVolume)
-        //    musicSound.volume = Engine.current.gameSettings.soundSettings.musicVolume * Engine.current.gameSettings.soundSettings.masterVolume;
+        if (Engine.current != null && musicSound.volume != Engine.current.gameSettings.soundSettings.musicVolume)
+            musicSound.volume = Engine.current.gameSettings.soundSettings.musicVolume * Engine.current.gameSettings.soundSettings.masterVolume;
     }
 
     void Check_Ambient_Queue()

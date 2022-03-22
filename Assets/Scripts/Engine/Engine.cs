@@ -131,6 +131,7 @@ public abstract class Engine : MonoBehaviour
         curtain = userInterface.curtain;
         SoundRecorder.Play_Music(mainTheme);
         SoundRecorder.Play_Ambient(ambient);
+        
     }
 
     private void Start()
