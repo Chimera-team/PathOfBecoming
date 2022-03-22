@@ -26,7 +26,7 @@ public class Stolb : MonoBehaviour
             }
         }
 
-        if(blocks[blocks.Length - 1].isFilled)
+        if(blocks[blocks.Length - 1].isFilled && clickable)
         {
             fullStolb = true;
         }    
@@ -64,4 +64,5 @@ public class Stolb : MonoBehaviour
             fullStolb = true;
         }
     }    
+    
 }

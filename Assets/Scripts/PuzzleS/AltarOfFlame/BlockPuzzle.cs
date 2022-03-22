@@ -213,5 +213,17 @@ public class BlockPuzzle : Puzzle
         {
             stolb.clickable = what;
         }
+        if(what)
+        {
+            CheckStolbs();
+        }
+
+    }
+    private void CheckStolbs()
+    {
+        if(!stolbs[1].blocks[stolbs[1].blocks.Length - 1].GetComponent<Block>().isFilled)
+        {
+            stolbs[1].fullStolb = false;
+        }
     }
 }

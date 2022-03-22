@@ -54,7 +54,7 @@ public class BlackBlock : Block
 
         bp.AllowOrNoClicks(false);
         //block.PaintBlock(Color.yellow);
-        Debug.Log("tut");
+        //Debug.Log("tut");
         yield return new WaitForSeconds(.5f);
         block.PaintBlock(Color.red);
         yield return new WaitForSeconds(.5f);
