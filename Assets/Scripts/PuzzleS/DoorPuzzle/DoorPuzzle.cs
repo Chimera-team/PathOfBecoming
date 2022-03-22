@@ -193,5 +193,9 @@ public class DoorPuzzle : Puzzle
 
             }
         }
+        else
+        {
+            OnLose();
+        }
     }
 }
