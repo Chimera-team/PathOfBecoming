@@ -5,11 +5,46 @@ using UnityEngine.SceneManagement;
 
 public class TransitionBetweenScenes : MonoBehaviour
 {
+    private bool firstCadr = true;
+    bool done = false;
     [SerializeField] private Animator fadeAnimator;
     [SerializeField] private int loadLevel; // загружаемый уровень
+    [SerializeField] private GameObject setAndOff;
     public bool CanULoadNextLvl;
     private float fadeLength; // длина анимации
     [SerializeField] CanvasGroup[] CutScenes;
+    private void Awake()
+    {
+        if(setAndOff!=null)
+        {
+            setAndOff.SetActive(true);
+            
+        }      
+    }
+    private void Start()
+    {
+        if (setAndOff != null)
+            setAndOff.SetActive(false);
+    }
+    private void Update()
+    {
+        if(!done)
+        {
+            if (firstCadr)
+            {
+                if (setAndOff != null)
+                {
+                    setAndOff.SetActive(true);
+                    firstCadr = false;
+                }
+            }
+            else if (setAndOff != null)
+            {
+                setAndOff.SetActive(false);
+                done = true;
+            }
+        }
+    }
     /// <summary>
     /// Затухание
     /// </summary>

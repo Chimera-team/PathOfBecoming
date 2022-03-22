@@ -521,6 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeAnimator: {fileID: 7322088259357342393}
   loadLevel: 1
+  setAndOff: {fileID: 564008219}
   CanULoadNextLvl: 1
   CutScenes:
   - {fileID: 460246313}
@@ -576,6 +577,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &202434020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7515208875906148994, guid: abbf34da2ce09a44297e483f2241ef21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1732113808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &210445752
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,17 +704,17 @@ PrefabInstance:
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
@@ -897,12 +910,12 @@ PrefabInstance:
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abbf34da2ce09a44297e483f2241ef21, type: 3}
@@ -1880,7 +1893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &564008220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,6 +1996,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSound: {fileID: 614788531}
   resolutionDropdown: {fileID: 6747289999463002077}
+  masterVolSlider: {fileID: 1965211430}
+  musicVolSlider: {fileID: 202434020}
+  effectsVolSlider: {fileID: 2098935218}
 --- !u!82 &614788531 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 4822644466423421992, guid: 12709fc91c194c84bb9bdfa93203a1c2,
@@ -5494,17 +5510,17 @@ PrefabInstance:
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
@@ -5680,12 +5696,12 @@ PrefabInstance:
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abbf34da2ce09a44297e483f2241ef21, type: 3}
@@ -5776,17 +5792,17 @@ PrefabInstance:
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554008636831245829, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
@@ -5962,12 +5978,12 @@ PrefabInstance:
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8453388
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067661308141848383, guid: abbf34da2ce09a44297e483f2241ef21,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abbf34da2ce09a44297e483f2241ef21, type: 3}
@@ -6360,6 +6376,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895773371}
   m_CullTransparentMesh: 0
+--- !u!114 &1965211430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7515208875906148994, guid: abbf34da2ce09a44297e483f2241ef21,
+    type: 3}
+  m_PrefabInstance: {fileID: 211620418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1997999180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6595,6 +6623,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2098935218 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7515208875906148994, guid: abbf34da2ce09a44297e483f2241ef21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1812292707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2119445369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4435122315171495244, guid: abbf34da2ce09a44297e483f2241ef21,

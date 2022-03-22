@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SoundSlidersController : MonoBehaviour
@@ -7,6 +8,9 @@ public class SoundSlidersController : MonoBehaviour
     public AudioSource musicSound;
     private GameSettings gameSettings;
     [SerializeField] Dropdown resolutionDropdown;
+    [SerializeField] Slider masterVolSlider;
+    [SerializeField] Slider musicVolSlider;
+    [SerializeField] Slider effectsVolSlider;
     //private GameSettings gameSettings;
     private void Start()
     {
@@ -25,7 +29,12 @@ public class SoundSlidersController : MonoBehaviour
             res[0] = 1920;
             res[1] = 1080;
         }
+        masterVolSlider.value = gameSettings.soundSettings.masterVolume;
+        musicVolSlider.value = gameSettings.soundSettings.musicVolume;
+        effectsVolSlider.value = gameSettings.soundSettings.effectsVolume;
+        
         Screen.SetResolution(res[0], res[1], true);
+        
     }
     public void OnMasterSliderValueChange(float val)
     {
