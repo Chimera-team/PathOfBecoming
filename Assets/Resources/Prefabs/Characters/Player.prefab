@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b9a162fae0a3743ba6160e911295ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwRock: {fileID: 8300000, guid: be51c85cfb21e034d909d1f815fa8eb3, type: 3}
 --- !u!114 &8406836705626711465
 MonoBehaviour:
   m_ObjectHideFlags: 0

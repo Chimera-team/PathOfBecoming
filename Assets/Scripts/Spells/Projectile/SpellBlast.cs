@@ -23,8 +23,6 @@ public class SpellBlast : MonoBehaviour
     IEnumerator Time_To_Live()
     {
         yield return new WaitForSeconds(timeToLive);
-        if (Engine.current.playerController.buttonsControl is CastingHandler)
-            Engine.current.playerController.Change_Controls<DefaultHandler>();
         Destroy(gameObject);
     }
 }
