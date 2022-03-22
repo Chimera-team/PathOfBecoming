@@ -32,11 +32,13 @@ public class Block : MonoBehaviour
             currentMana = 0;
         //sp.color = Color.yellow;
         sp.sprite = filledSprite;
-        isFilled = true;
+        
         if(HaveRazlom)
         {
             stolb.StartRazlom(this);
         }
+
+        isFilled = true;
         return currentMana;
     }
     public void EmptyBlock()
