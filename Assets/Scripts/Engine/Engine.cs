@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 public abstract class Engine : MonoBehaviour
 {
-    public static bool load = false;
+    public static bool load = true;
 
     public static Engine current;
 
